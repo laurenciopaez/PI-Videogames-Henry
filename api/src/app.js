@@ -3,7 +3,8 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 
-const routes = require('./routes/index.js'); //rutas definidas aqui
+const mainRouter = require('./routes/mainRouter.js'); //rutas definidas aqui
+
 
 require('./db.js');
 
@@ -24,7 +25,7 @@ server.use((req, res, next) => {
   next();
 });
 
-server.use('/', routes);
+server.use('/', mainRouter);
 
 // Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
@@ -34,11 +35,7 @@ server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   res.status(status).send(message);
 });
 
-const PORT = process.env.PORT || 3000; //Defino el puerto del servidor
 
-server.listen(PORT, () => {
-  
-})
 
 
 module.exports = server;

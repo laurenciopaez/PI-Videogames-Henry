@@ -1,14 +1,6 @@
-const { Pool } = require("pg"); //Pool : conjunto de conecciones
-/* Un "pool de conexiones" es una técnica común utilizada en entornos de bases de datos para optimizar el rendimiento y minimizar la sobrecarga de establecer y cerrar conexiones con frecuencia. En lugar de abrir y cerrar una nueva conexión cada vez que un cliente necesita acceder a la base de datos, se crean y mantienen varias conexiones en un "pool" para que puedan ser reutilizadas por múltiples clientes. */
+const { Videogame } = require("../db.js"); //proviene de la base de datos
 require("dotenv").config();
 const axios = require("axios");
-
-const pool = new Pool({
-  host: "localhost",
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: "videogames",
-});
 
 const urlVideogames = "https://api.rawg.io/api/games";
 
@@ -73,11 +65,12 @@ const getVideogameByName = async (req, res) => {
   const games = [];
   try {
     const apiResponse = await axios.get(
-      `${urlVideogames}?search=${name}&key=${process.env.API_KEY}`   //pide a la api la info
+      `${urlVideogames}?search=${name}&key=${process.env.API_KEY}` //pide a la api la info
     );
     const results = apiResponse.data.results;
 
-    results.forEach((game) => {    //aca guarda la informacion que necesitamos para la bd y mostrar
+    results.forEach((game) => {
+      //aca guarda la informacion que necesitamos para la bd y mostrar
       const gameObj = {
         id: game.id,
         name: game.name,
@@ -89,7 +82,7 @@ const getVideogameByName = async (req, res) => {
         genres: game.genres.map((genre) => genre.name),
       };
 
-      games.push(gameObj);   //se pushea sobre el array de objetos
+      games.push(gameObj); //se pushea sobre el array de objetos
     });
     res.json(games);
   } catch (error) {
@@ -98,26 +91,27 @@ const getVideogameByName = async (req, res) => {
   }
 };
 
-//Todavia no funciona
 const createVideogames = async (req, res) => {
   const { name, description, platform, image, landingDate, rating } = req.body;
 
-  const response = await pool.query(
-    "INSERT INTO Videogame (name, description, platform , image, landingDate, rating) VALUES ($1, $2, $3, $4, $5, $6)",
-    [name, description, platform, image, landingDate, rating]
-  );
-
-  console.log(response);
-  res.send("videogame created");
+  try {
+    const response = await Videogame.create({
+      name,
+      description,
+      platform,
+      image,
+      landingDate,
+      rating,
+    });
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 };
-
-//obtiene un arreglo con todos los generos existentes de la api
-const getGenres = async (req, res) => {};
 
 module.exports = {
   getVideogames,
   createVideogames,
   getVideogameById,
   getVideogameByName,
-  getGenres, //mandar para otro controler
-};
+}

@@ -7,6 +7,11 @@ const {
     createVideogames,
     getVideogameById,
     getVideogameByName,
-    getGenres, //mandar a otro handler
-  } = require('../controllers/videogame.controller')
+  } = require('../controllers/videogames.controller')
+
+  const getVideogamesErrorHandler = (err, req, res, next) => {
+    console.log(err)
+    res.send(`Something wrong ${err.message} in getVideogames`)
+  }
+
   
