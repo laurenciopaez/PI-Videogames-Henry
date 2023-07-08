@@ -13,10 +13,12 @@ router.get('/videogames', getVideogames
 
 router.post('/videogames', createVideogames)
 
-router.post('/videogames/:id', getVideogameById)
+router.get('/videogames/name', getVideogameByName)
 
-router.get('/videogames/:name', getVideogameByName)
+router.get('/videogames/:id', getVideogameById)
 
+
+// localhost:3001/videogames/?name= " .."
 router.get('/genres', getGenres)
 
 module.exports = router;
