@@ -3,6 +3,6 @@ const { getGenres} = require('../controllers/genres.controller');
 
 const genresRouter = Router();
 
-genresRouter.get('/genres', getGenres)
+genresRouter.get('/', getGenres)
 
 module.exports = genresRouter;
