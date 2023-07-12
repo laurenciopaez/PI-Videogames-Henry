@@ -1,18 +1,28 @@
-import {Router, Route} from 'react-router-dom';
-import LandingPage from './modules/LandingPage';
-import HomePage from './modules/HomePage';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./store/index";
+import React from "react";
+import LandingPage from "./components/LandingPage";
+import HomePage from "./components/HomePage";
 
-function App() {
-  return (
-    <div>
-
-      <Router>
-        <Route path="/" element={<LandingPage/>} />
-        <Route path="/home" element={<HomePage/>}/>
-      </Router>
+const App = () => {
+    return (
+      <Provider store={store}>
+        <Router>
+          <Switch>
             
-    </div>
-  );
+            <Route path="/home">
+              <HomePage/>
+            </Route>
+            <Route path="/">
+              <LandingPage/>
+            </Route>
+          </Switch>
+        </Router>
+      </Provider>
+    );
+
+
 }
 
 export default App;
