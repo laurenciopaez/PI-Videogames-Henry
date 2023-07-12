@@ -1,9 +1,16 @@
-import './App.css';
+import {Router, Route} from 'react-router-dom';
+import LandingPage from './modules/LandingPage';
+import HomePage from './modules/HomePage';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Henry Videogames</h1>
+    <div>
+
+      <Router>
+        <Route path="/" element={<LandingPage/>} />
+        <Route path="/home" element={<HomePage/>}/>
+      </Router>
+            
     </div>
   );
 }
