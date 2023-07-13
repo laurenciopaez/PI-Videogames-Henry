@@ -6,7 +6,7 @@ const LandingPage = () => {
   return (
     <>
       <div className={`${styles.container} ${styles.background}`}>
-        <div className={`${styles.welcome} ${styles.fontTitle}`}>Welcome to Videogames</div>
+        <div className={`${styles.welcome} ${styles.fontTitle}`}>Welcome to Go Play</div>
         <div className={styles.pic_ctn}>
           <img
             src="https://i.pinimg.com/564x/15/e8/ec/15e8ecb495252e7ebc7989383883515a.jpg"

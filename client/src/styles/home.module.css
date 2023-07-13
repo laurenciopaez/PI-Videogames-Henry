@@ -1,0 +1,39 @@
+.container {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .sidebar {
+    width: 200px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    height: 100%;
+  }
+  
+  .content {
+    flex-grow: 1;
+    padding: 20px;
+  }
+  
+  .searchBar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .searchBar input {
+    flex-grow: 1;
+    padding: 5px;
+  }
+  
+  .searchBar button {
+    padding: 5px 10px;
+  }
+
+  .grid {
+    border: 1px solid black;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 16px;
+  }
