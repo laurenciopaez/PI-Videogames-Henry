@@ -2,6 +2,8 @@ import {
   GET_VIDEOGAMES_REQUEST,
   GET_VIDEOGAMES_FAILURE,
   GET_VIDEOGAMES_SUCCESS,
+  GET_VIDEOGAMES_ID_REQUEST,
+  GET_VIDEOGAMES_NAME_REQUEST,
 } from "../../types";
 
 const initialState = {
@@ -17,6 +19,18 @@ export default function infoServerReducer(state = initialState, action) {
         ...state,
         loading: true,
       };
+    case GET_VIDEOGAMES_ID_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: action.payload,
+      };
+    case GET_VIDEOGAMES_NAME_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: action.payload,
+      }
     case GET_VIDEOGAMES_SUCCESS:
       return {
         ...state,
@@ -30,6 +44,7 @@ export default function infoServerReducer(state = initialState, action) {
         loading: false,
         error: action.payload,
       };
+
     default:
       return state;
   }

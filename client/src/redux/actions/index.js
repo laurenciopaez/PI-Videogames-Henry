@@ -2,8 +2,13 @@ import {
   ADD,
   DELETE,
   GET_VIDEOGAMES_REQUEST,
+  GET_VIDEOGAMES_ID_REQUEST,
   GET_VIDEOGAMES_SUCCESS,
   GET_VIDEOGAMES_FAILURE,
+  GET_VIDEOGAMES_NAME_REQUEST,
+  ORDER_BY_ALPHABET,
+  ORDER_BY_RATING,
+
 } from "../../types/index";
 
 import axios from 'axios'
@@ -41,3 +46,43 @@ export const getVideogamesFailure = (error) => ({
   type: GET_VIDEOGAMES_FAILURE,
   payload: error,
 });
+
+export const pedirVideojuegosId = (id) => {
+  return (dispatch) => {
+    dispatch({ type: GET_VIDEOGAMES_ID_REQUEST });
+    axios
+      .get(`http://localhost:3001/videogames/${id}`)
+      .then((response) => {
+        console.log(`getvideogames ID: ${id} response: `);
+        console.log(response.data);
+        dispatch({ type: GET_VIDEOGAMES_SUCCESS, payload: response.data });
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch({ type: GET_VIDEOGAMES_FAILURE, payload: error.message });
+      });
+  };
+}
+
+export const pedirVideojuegosName = (name) => {
+  return (dispatch) => {
+    dispatch({type: GET_VIDEOGAMES_NAME_REQUEST})
+    axios
+    .get(`http://localhost:3001/videogames/name?name=${name}`)
+    .then( (response) => {
+      console.log(`getvideogames NAME: ${name} response: `);
+      console.log(response.data);
+      dispatch({ type: GET_VIDEOGAMES_SUCCESS, payload: response.data });
+    })
+    .catch((error) => {
+      console.log(error);
+      dispatch({ type: GET_VIDEOGAMES_FAILURE, payload: error.message });
+    });
+  }
+}
+
+// ordenamiento 
+
+export const orderByRating = () => ({ type: ORDER_BY_RATING})
+
+export const orderByAlphabet = () => ({type: ORDER_BY_ALPHABET})

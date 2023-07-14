@@ -3,11 +3,14 @@ import styles from "../styles/home.module.css";
 import { Link } from "react-router-dom";
 //redux
 import { connect } from "react-redux";
-import { pedirVideojuegos } from "../redux/actions";
+import { pedirVideojuegos, pedirVideojuegosId } from "../redux/actions";
 
+//modulos
 import Card from "./Card";
+import SearchBar from "./SearchBar";
+import Order from "./Order";
 
-const HomePage = ({ videojuegos, loading, pedirVideojuegos }) => {
+const HomePage = ({  /* variables:  */videojuegos, loading, /* functions:  */pedirVideojuegos , pedirVideojuegosId }) => {
   useEffect(() => {
     pedirVideojuegos();
   }, [pedirVideojuegos]);
@@ -17,26 +20,19 @@ const HomePage = ({ videojuegos, loading, pedirVideojuegos }) => {
       <div className={styles.container}>
         {/* sidebar */}
         <div className={styles.sidebar}>
-          <h2>Clasificación</h2>
-          <ul>
-            <li>Opción 1</li>
-            <li>Opción 2</li>
-            <li>Opción 3</li>
-          </ul>
+          <h2>Order / Filter</h2>
+            <Order/>
         </div>
         {/*search bar  */}
         <div className={styles.content}>
-          <div className={styles.searchBar}>
-            <input type="text" placeholder="Buscar..." />
-            <button type="submit">Buscar</button>
-          </div>
+          <SearchBar/>
           {/* Main content */}
           <h2>Contenido principal</h2>
           <div className={styles.grid}>
           {loading ? (
           <p>Cargando...</p>
         ) : (
-          videojuegos && videojuegos.length > 0 ? (
+           videojuegos && videojuegos.length > 0 ? (
             videojuegos.map((el) => (
               <Card
                 key={el.id}
@@ -47,7 +43,13 @@ const HomePage = ({ videojuegos, loading, pedirVideojuegos }) => {
               />
             ))
           ) : (
-            <p>No se encontraron videojuegos.</p>
+            <Card
+                key={videojuegos.id}
+                name={videojuegos.name}
+                image={videojuegos.image}
+                landingDate={videojuegos.landingDate}
+                platform={videojuegos.platform}
+              />
           )
         )}
           </div>

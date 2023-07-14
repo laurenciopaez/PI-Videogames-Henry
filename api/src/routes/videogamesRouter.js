@@ -4,12 +4,13 @@ const { getVideogames, createVideogames, getVideogameById, getVideogameByName } 
 
 const videogamesRouter = Router();
 
-videogamesRouter.get('/', getVideogames)
-
-videogamesRouter.post('/', createVideogames)
 
 videogamesRouter.get('/name', getVideogameByName)
 
 videogamesRouter.get('/:id', getVideogameById)
+
+videogamesRouter.get('/', getVideogames)
+
+videogamesRouter.post('/', createVideogames)
 
 module.exports = videogamesRouter;

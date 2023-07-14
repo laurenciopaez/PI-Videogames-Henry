@@ -64,8 +64,18 @@ const getVideogameById = async (req, res) => {
     const response = await axios.get(
       `${urlVideogames}/${req.params.id}?key=${process.env.API_KEY}`
     );
-    //falta conectar con el front
-    res.send(response.data);
+    const tags = response.data.tags.map((tag) => tag.name);
+    const platforms = response.data.platforms.map( (plataform) => plataform.platform.name)
+    const videogame = {
+      name: response.data.name,
+      description: tags,
+      platform: platforms,
+      image: response.data.background_image,
+      landingDate: response.data.released,
+      rating: response.data.rating,
+    };
+    console.log('id')
+    res.send(videogame);
   } catch (error) {
     console.error(error);
     res.status(500).send("Error al obtener el videojuego por id");
@@ -112,6 +122,7 @@ const getVideogameByName = async (req, res) => {
 
     // Combina los resultados de la API y la base de datos en una sola respuesta
     const response = [...transformedDbResults, ...games];
+    console.log('name')
     res.json(response);
   } catch (error) {
     console.error(error);
