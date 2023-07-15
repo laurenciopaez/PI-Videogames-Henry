@@ -10,13 +10,17 @@ function Order({ orderByRating, orderByAlphabet }) {
     const [sortingType, setSortingType] =useState('')
 
     const handleSortingChange = (event) => {
-        setSortingType(event.target.value);
+        const selectedSortingType = event.target.value;
+        setSortingType(selectedSortingType);
 
-        if(sortingType === "alphabetic") {
+        if(selectedSortingType === "alphabetic") {
+            console.log('alphabet')
             orderByAlphabet()
-        }
-        if(sortingType === 'rating') {
+            
+        } else if(selectedSortingType === 'rating') {
+            console.log('rating')
             orderByRating()
+            
         }
 
     }

@@ -4,6 +4,8 @@ import {
   GET_VIDEOGAMES_SUCCESS,
   GET_VIDEOGAMES_ID_REQUEST,
   GET_VIDEOGAMES_NAME_REQUEST,
+  ORDER_BY_ALPHABET,
+  ORDER_BY_RATING,
 } from "../../types";
 
 const initialState = {
@@ -30,7 +32,44 @@ export default function infoServerReducer(state = initialState, action) {
         ...state,
         loading: true,
         error: action.payload,
+      };
+    case ORDER_BY_ALPHABET: {
+      state.videogames100.sort((a, b) => {
+        const nameA = a.name.toUpperCase();
+        const nameB = b.name.toUpperCase();
+
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+      });
+      console.log('alphabet')
+      return {
+        ...state,
+        videogames100: [...state.videogames100]
       }
+    }
+    case ORDER_BY_RATING: {
+      state.videogames100.sort((a, b) => {
+        const ratingA = a.rating;
+        const ratingB = b.rating;
+    
+        if (ratingA < ratingB) {
+          return -1;
+        }
+        if (ratingA > ratingB) {
+          return 1;
+        }
+        return 0;
+      });
+      return {
+        ...state,
+        videogames100: [...state.videogames100]
+      };
+    }
     case GET_VIDEOGAMES_SUCCESS:
       return {
         ...state,
