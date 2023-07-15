@@ -1,0 +1,50 @@
+.detail_page {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+    width: 60vw;
+    padding: 20px;
+    background-color: rgba(255, 255, 255);
+    box-shadow: 0 0px 200px 300px rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    border-radius: 15px;
+  }
+  
+  .detail_page__name {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+  
+  .detail_page__image img {
+    width: 40vw;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  .detail_page__landing_date,
+  .detail_page__platform {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  .detail_page__close_button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px;
+    font-size: 16px;
+    background-color: transparent;
+    color: #333;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .detail_page__close_button:hover {
+    color: #ff0000;
+  }
