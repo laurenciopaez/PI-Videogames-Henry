@@ -2,13 +2,13 @@ import React, {useState} from 'react';
 
 //redux
 import { connect } from 'react-redux';
-import { orderByRating, orderByAlphabet  } from '../redux/actions';
+import { orderByRating, orderByAlphabet, orderByAlphabetD  } from '../redux/actions';
 
 import styles from '../styles/order.module.css'
 
 
 
-function Order({ orderByRating, orderByAlphabet }) {
+function Order({ orderByRating, orderByAlphabet, orderByAlphabetD }) {
     const [sortingType, setSortingType] =useState('')
 
     const handleSortingChange = (event) => {
@@ -23,6 +23,9 @@ function Order({ orderByRating, orderByAlphabet }) {
             console.log('rating')
             orderByRating()
             
+        } else if (selectedSortingType === 'D-alphabetic' ) {
+          console.log('alphabet al revez')
+          orderByAlphabetD();
         }
 
     }
@@ -34,6 +37,7 @@ function Order({ orderByRating, orderByAlphabet }) {
             <select value={sortingType} onChange={handleSortingChange}>
               <option value="">Choose an option</option>
               <option value="alphabetic">Alphabetic order</option>
+              <option value="D-alphabetic">D- Alphabetic order</option>
               <option value="rating">Rating order</option>
             </select>
           </label>
@@ -45,7 +49,8 @@ function Order({ orderByRating, orderByAlphabet }) {
   const mapDispatchToProps = (dispatch) => {
     return {
       orderByAlphabet: () => dispatch(orderByAlphabet()),
-      orderByRating: () => dispatch(orderByRating())
+      orderByRating: () => dispatch(orderByRating()),
+      orderByAlphabetD: () => dispatch(orderByAlphabetD())
     };
   };
   

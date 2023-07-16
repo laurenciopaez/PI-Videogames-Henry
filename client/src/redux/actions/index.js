@@ -8,6 +8,7 @@ import {
   GET_VIDEOGAMES_NAME_REQUEST,
   ORDER_BY_ALPHABET,
   ORDER_BY_RATING,
+  ORDER_BY_DALPHABET,
   DESCRIPTION_MAKER,
 
 } from "../../types/index";
@@ -87,6 +88,8 @@ export const pedirVideojuegosName = (name) => {
 export const orderByRating = () => ({ type: ORDER_BY_RATING})
 
 export const orderByAlphabet = () => ({type: ORDER_BY_ALPHABET})
+
+export const orderByAlphabetD = () => ({type: ORDER_BY_DALPHABET})
 
 //description maker
 

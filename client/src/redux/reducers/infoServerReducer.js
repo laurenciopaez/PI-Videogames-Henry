@@ -6,6 +6,7 @@ import {
   GET_VIDEOGAMES_NAME_REQUEST,
   ORDER_BY_ALPHABET,
   ORDER_BY_RATING,
+  ORDER_BY_DALPHABET,
   DESCRIPTION_MAKER,
 } from "../../types";
 
@@ -63,6 +64,24 @@ export default function infoServerReducer(state = initialState, action) {
           return -1;
         }
         if (ratingA > ratingB) {
+          return 1;
+        }
+        return 0;
+      });
+      return {
+        ...state,
+        videogames100: [...state.videogames100]
+      };
+    }
+    case ORDER_BY_DALPHABET: {
+      state.videogames100.sort((a, b) => {
+        const nameA = a.name.toUpperCase();
+        const nameB = b.name.toUpperCase();
+    
+        if (nameA > nameB) { 
+          return -1;
+        }
+        if (nameA < nameB) { 
           return 1;
         }
         return 0;
