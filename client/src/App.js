@@ -6,23 +6,20 @@ import LandingPage from "./components/LandingPage";
 import HomePage from "./components/HomePage";
 
 const App = () => {
-    return (
-      <Provider store={store}>
-        <Router>
-          <Switch>
-            
-            <Route path="/home">
-              <HomePage/>
-            </Route>
-            <Route path="/">
-              <LandingPage/>
-            </Route>
-          </Switch>
-        </Router>
-      </Provider>
-    );
-
-
-}
+  return (
+    <Provider store={store}>
+      <Router>
+        <Switch>
+          <Route path="/home">
+            <HomePage />
+          </Route>
+          <Route path="/">
+            <LandingPage />
+          </Route>
+        </Switch>
+      </Router>
+    </Provider>
+  );
+};
 
 export default App;

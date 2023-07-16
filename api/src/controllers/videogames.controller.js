@@ -1,16 +1,16 @@
 const { Videogame, Genre } = require("../db.js"); //proviene de la base de datos
 require("dotenv").config();
 const axios = require("axios");
-const { Op } = require('sequelize');
+const { Op } = require("sequelize");
 
 const urlVideogames = "https://api.rawg.io/api/games";
 
 //Codigo para hacer peticiones a chat gpt
-const urlOpenAi = 'https://api.openai.com/v1/chat/completions';
+const urlOpenAi = "https://api.openai.com/v1/chat/completions";
 
 const headers = {
-  'Content-Type': 'application/json',
-  'Authorization': `Bearer ${process.env.OPEN_AI_API_KEY}`
+  "Content-Type": "application/json",
+  Authorization: `Bearer ${process.env.OPEN_AI_API_KEY}`,
 };
 
 //getVideogames tiene que obtener un arreglo de objetos con su informacion
@@ -73,7 +73,9 @@ const getVideogameById = async (req, res) => {
       `${urlVideogames}/${req.params.id}?key=${process.env.API_KEY}`
     );
     const tags = response.data.tags.map((tag) => tag.name);
-    const platforms = response.data.platforms.map( (plataform) => plataform.platform.name)
+    const platforms = response.data.platforms.map(
+      (plataform) => plataform.platform.name
+    );
     const videogame = {
       name: response.data.name,
       description: tags,
@@ -82,7 +84,7 @@ const getVideogameById = async (req, res) => {
       landingDate: response.data.released,
       rating: response.data.rating,
     };
-    console.log('id')
+    console.log("id");
     res.send(videogame);
   } catch (error) {
     console.error(error);
@@ -93,7 +95,7 @@ const getVideogameById = async (req, res) => {
 //debe obtener los primeros 15 videojuegos que se encuentren con la palabra recibida por query, no tiene que importar mayusculas ni minusculas, debe buscar api y base de datos
 const getVideogameByName = async (req, res) => {
   const name = req.query.name; //Pide el parametro pasado desde la peticion http://localhost:3001/videogames/name?name=mario
-  
+
   try {
     const apiResponse = await axios.get(
       `${urlVideogames}?search=${name}&key=${process.env.API_KEY}` //pide a la api la info
@@ -130,7 +132,7 @@ const getVideogameByName = async (req, res) => {
 
     // Combina los resultados de la API y la base de datos en una sola respuesta
     const response = [...transformedDbResults, ...games];
-    console.log('name')
+    console.log("name");
     res.json(response);
   } catch (error) {
     console.error(error);
@@ -171,26 +173,29 @@ const createVideogames = async (req, res) => {
 
 //Inteto de usar open ai para completar las descripciones
 const descriptionMaker = async (req, res) => {
-  const { data } = req.body
+  const { data } = req.body;
 
   const body = {
-    model: 'gpt-3.5-turbo',
+    model: "gpt-3.5-turbo",
     messages: [
-      { role: 'user', content: `Make a description of two paragraphs of a videogame using this tags: ${data} , you cannot use any name, has to be generic ` }
-    ]
+      {
+        role: "user",
+        content: `Make a description of two paragraphs of a videogame using this tags: ${data} , you cannot use any name, has to be generic `,
+      },
+    ],
   };
 
   try {
     const response = await axios.post(urlOpenAi, body, { headers });
 
     const messages = response.data.choices[0].message.content;
-    console.log(messages)
+    console.log(messages);
     res.json({ description: messages });
   } catch (error) {
     console.error(error);
     res.status(500).send("Error al generar la descripción");
   }
-}
+};
 
 module.exports = {
   getVideogames,

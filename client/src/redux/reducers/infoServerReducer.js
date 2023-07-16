@@ -12,7 +12,7 @@ import {
 
 const initialState = {
   videogames100: [],
-  trueDescription: '',
+  trueDescription: "",
   error: null,
   loading: false,
 };
@@ -49,17 +49,17 @@ export default function infoServerReducer(state = initialState, action) {
         }
         return 0;
       });
-      console.log('alphabet')
+      console.log("alphabet");
       return {
         ...state,
-        videogames100: [...state.videogames100]
-      }
+        videogames100: [...state.videogames100],
+      };
     }
     case ORDER_BY_RATING: {
       state.videogames100.sort((a, b) => {
         const ratingA = a.rating;
         const ratingB = b.rating;
-    
+
         if (ratingA < ratingB) {
           return -1;
         }
@@ -70,25 +70,25 @@ export default function infoServerReducer(state = initialState, action) {
       });
       return {
         ...state,
-        videogames100: [...state.videogames100]
+        videogames100: [...state.videogames100],
       };
     }
     case ORDER_BY_DALPHABET: {
       state.videogames100.sort((a, b) => {
         const nameA = a.name.toUpperCase();
         const nameB = b.name.toUpperCase();
-    
-        if (nameA > nameB) { 
+
+        if (nameA > nameB) {
           return -1;
         }
-        if (nameA < nameB) { 
+        if (nameA < nameB) {
           return 1;
         }
         return 0;
       });
       return {
         ...state,
-        videogames100: [...state.videogames100]
+        videogames100: [...state.videogames100],
       };
     }
     case GET_VIDEOGAMES_SUCCESS:
@@ -108,7 +108,7 @@ export default function infoServerReducer(state = initialState, action) {
       return {
         ...state,
         trueDescription: action.payload,
-      }
+      };
     }
     default:
       return state;

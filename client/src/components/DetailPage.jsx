@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import style from "../styles/detail.module.css";
 
 import { connect } from "react-redux";
@@ -20,6 +20,7 @@ function DetailPage({
     onClose();
   };
 
+  //una vez que carga el modulo envia la informacion al action para crear la descripcion con AI
   useEffect(() => {
     descriptionMaker(description);
   }, [descriptionMaker]);
@@ -33,16 +34,21 @@ function DetailPage({
         <div className={style.detail_page__image}>
           <img src={image} alt="Imagen del videojuego" />
         </div>
-        <p className={style.detail_page__landing_date}>Landing Date: {landingDate}</p>
-        <p className={style.detail_page__platform}>Plataforms: {platformString}</p>
-        <p className={style.detail_page__description}>Description: {trueDescription.toString()}</p>
+        <p className={style.detail_page__landing_date}>
+          Landing Date: {landingDate}
+        </p>
+        <p className={style.detail_page__platform}>
+          Plataforms: {platformString}
+        </p>
+        <p className={style.detail_page__description}>
+          Description: {trueDescription.toString()}
+        </p>
         <button
           className={style.detail_page__close_button}
           onClick={handleButtonClick}
         >
           X
         </button>
-
       </div>
     </>
   );

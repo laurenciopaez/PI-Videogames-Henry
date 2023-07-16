@@ -27,14 +27,14 @@ const getGenres = async (req, res) => {
     console.log(arrayGenres);
     // hasta aca tengo un array con todos los generos de la api
     arrayGenres.forEach(async (name) => {
-        try {
-            await Genre.create({ name })
-        } catch (error) {
-            console.error(`Error al guardar el nombre "${name}":`, error);
-        }
-    })
+      try {
+        await Genre.create({ name });
+      } catch (error) {
+        console.error(`Error al guardar el nombre "${name}":`, error);
+      }
+    });
 
-    res.send(arrayGenres)
+    res.send(arrayGenres);
   } catch (error) {
     console.error(error);
     res.status(500).send("Error al obtener los géneros de los videojuegos");

@@ -10,9 +10,10 @@ const Card = ({ name, image, landingDate, platform, rating, description }) => {
   };
 
   const handleDetailPageClose = () => {
-    setShownDetailPage(false)
-  }
+    setShownDetailPage(false);
+  };
 
+  //Si se clickeo se muestra el modulo detail Page
   if (showDetailPage) {
     return (
       <DetailPage
@@ -20,8 +21,9 @@ const Card = ({ name, image, landingDate, platform, rating, description }) => {
         image={image}
         landingDate={landingDate}
         platform={platform}
-        rating = {rating}
-        description = {description}
+        rating={rating}
+        //se pasa la descripcion con los tags
+        description={description}
         onClose={handleDetailPageClose}
       />
     );
