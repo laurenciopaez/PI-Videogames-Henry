@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { Link } from "react-router-dom";
 //redux
 import { connect } from "react-redux";
 import {
@@ -31,17 +31,45 @@ function Order({ orderByRating, orderByAlphabet, orderByAlphabetD }) {
   };
 
   return (
-    <form className={styles.orderBy}>
-      <label>
-        Order by:
-        <select value={sortingType} onChange={handleSortingChange}>
-          <option value="">Choose an option</option>
-          <option value="alphabetic">Alphabetic order</option>
-          <option value="D-alphabetic">D- Alphabetic order</option>
-          <option value="rating">Rating order</option>
-        </select>
-      </label>
-    </form>
+    <>
+      <form className={styles.orderBy}>
+        <label>
+          Order by:
+          <select value={sortingType} onChange={handleSortingChange}>
+            <option value="">Choose an option</option>
+            <option value="alphabetic">Alphabetic order</option>
+            <option value="D-alphabetic">D- Alphabetic order</option>
+            <option value="rating">Rating order</option>
+          </select>
+        </label>
+      </form>
+      <form className={styles.orderBy}>
+        <label>
+          Order by genre:
+          <select>
+            <option value="">Choose an option</option>
+            <option></option>
+            <option></option>
+            <option></option>
+            <option></option>
+            <option></option>
+            <option></option>
+            <option></option>
+            <option></option>
+            <option></option>
+            <option></option>
+            <option></option>
+          </select>
+        </label>
+      </form>
+      <div >
+        <button className={styles.button}>
+          <Link style={{ color: 'white', textDecoration: 'none' }} to="/create">
+            Create Videogame
+          </Link>
+        </button>
+      </div>
+    </>
   );
 }
 

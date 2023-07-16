@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styles from "../styles/home.module.css";
-import { Link } from "react-router-dom";
 //redux
 import { connect } from "react-redux";
 import { pedirVideojuegos } from "../redux/actions";
@@ -50,7 +49,7 @@ const HomePage = ({
         <div className={styles.content}>
           <SearchBar />
           {/* Main content */}
-          <h2 className={styles.center}>Main Content</h2>
+          <h2 className={styles.center} style={{ color: 'white' }}>Main Content</h2>
           <div className={styles.grid}>
             {loading
               ? Array.from({ length: itemsPerPage }).map((_, index) => (
