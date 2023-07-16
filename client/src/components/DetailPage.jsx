@@ -42,8 +42,8 @@ function DetailPage({
         >
           X
         </button>
+
       </div>
-      <div className={style.background}></div>
     </>
   );
 }

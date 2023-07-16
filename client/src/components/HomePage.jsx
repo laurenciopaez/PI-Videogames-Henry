@@ -42,6 +42,10 @@ const HomePage = ({
       <div className={styles.sidebar}>
         <h2 className={styles.center}>Order / Filter</h2>
         <Order />
+        <div>
+          <p>With love by: Laurencio Paez</p>
+          <p>Using: RAGW and OpenAi</p>
+        </div>
       </div>
       {/*search bar  */}
       <div className={styles.content}>
@@ -50,7 +54,12 @@ const HomePage = ({
         <h2 className={styles.center}>Main Content</h2>
         <div className={styles.grid}>
           {loading ? (
-            <p >Cargando...</p>
+            Array.from({ length: itemsPerPage }).map((_, index) => (
+              <div key={index} className={styles.loadingCard}>
+                <div className={styles.loadingImage}></div>
+                <div className={styles.loadingText}></div>
+              </div>
+            ))
           ) : (
             currentItems.map((el) => (
               <Card
