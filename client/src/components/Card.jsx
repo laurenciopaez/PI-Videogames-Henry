@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "../styles/cards.module.css";
 import DetailPage from "./DetailPage";
 
-const Card = ({ name, image, landingDate, platform }) => {
+const Card = ({ name, image, landingDate, platform, rating, description }) => {
   const [showDetailPage, setShownDetailPage] = useState(false);
 
   const handleClick = () => {
@@ -20,6 +20,8 @@ const Card = ({ name, image, landingDate, platform }) => {
         image={image}
         landingDate={landingDate}
         platform={platform}
+        rating = {rating}
+        description = {description}
         onClose={handleDetailPageClose}
       />
     );
@@ -32,8 +34,9 @@ const Card = ({ name, image, landingDate, platform }) => {
       <div className={styles.card} onClick={handleClick}>
         <h3>{name}</h3>
         <img src={image} alt="Game" />
-        <p>{landingDate}</p>
-        <p className={styles.platform}>{platformString}</p>
+        <p>Rating: {rating}</p>
+        <p>Landing Date: {landingDate}</p>
+        <p className={styles.platform}>Platforms: {platformString}</p>
       </div>
     </>
   );

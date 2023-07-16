@@ -8,6 +8,7 @@ import {
   GET_VIDEOGAMES_NAME_REQUEST,
   ORDER_BY_ALPHABET,
   ORDER_BY_RATING,
+  DESCRIPTION_MAKER,
 
 } from "../../types/index";
 
@@ -86,3 +87,21 @@ export const pedirVideojuegosName = (name) => {
 export const orderByRating = () => ({ type: ORDER_BY_RATING})
 
 export const orderByAlphabet = () => ({type: ORDER_BY_ALPHABET})
+
+//description maker
+
+export const descriptionMaker = (data) => {
+  return (dispatch) => {
+    axios.get('http://localhost:3001/videogames/OpenAi', {
+      params: data, // Pasar el objeto "data" como parámetros de consulta
+    })
+    .then(response => {
+      dispatch({ type: DESCRIPTION_MAKER, payload: response.data.description });
+      console.log(response.data);
+    })
+    .catch(error => {
+      // Manejar errores de la solicitud
+      console.error(error);
+    });
+  };
+}

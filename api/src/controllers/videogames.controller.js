@@ -5,6 +5,14 @@ const { Op } = require('sequelize');
 
 const urlVideogames = "https://api.rawg.io/api/games";
 
+//Codigo para hacer peticiones a chat gpt
+const urlOpenAi = 'https://api.openai.com/v1/chat/completions';
+
+const headers = {
+  'Content-Type': 'application/json',
+  'Authorization': `Bearer ${process.env.OPEN_AI_API_KEY}`
+};
+
 //getVideogames tiene que obtener un arreglo de objetos con su informacion
 const getVideogames = async (req, res) => {
   let arregloVideogames = [];
@@ -161,9 +169,33 @@ const createVideogames = async (req, res) => {
   }
 };
 
+//Inteto de usar open ai para completar las descripciones
+const descriptionMaker = async (req, res) => {
+  const { data } = req.body
+
+  const body = {
+    model: 'gpt-3.5-turbo',
+    messages: [
+      { role: 'user', content: `Make a description of two paragraphs of a videogame using this tags: ${data} , you cannot use any name, has to be generic ` }
+    ]
+  };
+
+  try {
+    const response = await axios.post(urlOpenAi, body, { headers });
+
+    const messages = response.data.choices[0].message.content;
+    console.log(messages)
+    res.json({ description: messages });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error al generar la descripción");
+  }
+}
+
 module.exports = {
   getVideogames,
   createVideogames,
   getVideogameById,
   getVideogameByName,
+  descriptionMaker,
 };

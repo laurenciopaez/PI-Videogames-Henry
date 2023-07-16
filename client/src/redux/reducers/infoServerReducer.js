@@ -6,10 +6,12 @@ import {
   GET_VIDEOGAMES_NAME_REQUEST,
   ORDER_BY_ALPHABET,
   ORDER_BY_RATING,
+  DESCRIPTION_MAKER,
 } from "../../types";
 
 const initialState = {
   videogames100: [],
+  trueDescription: '',
   error: null,
   loading: false,
 };
@@ -83,7 +85,12 @@ export default function infoServerReducer(state = initialState, action) {
         loading: false,
         error: action.payload,
       };
-
+    case DESCRIPTION_MAKER: {
+      return {
+        ...state,
+        trueDescription: action.payload,
+      }
+    }
     default:
       return state;
   }

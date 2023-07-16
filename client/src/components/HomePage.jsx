@@ -59,6 +59,8 @@ const HomePage = ({
                 image={el.image}
                 landingDate={el.landingDate}
                 platform={el.platform}
+                rating = {el.rating}
+                description = {el.description}
               />
             ))
           )}
