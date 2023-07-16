@@ -1,6 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital@1&display=swap');
+
+* {
+  font-family: 'Noto Serif', serif;
+}
+
 .container {
     display: flex;
-    height: 100vh;
+    height: 100%;
   }
   
   .sidebar {
@@ -13,25 +19,13 @@
   .content {
     flex-grow: 1;
     padding: 20px;
+    background-image: url('https://i.pinimg.com/736x/2d/4d/86/2d4d868b33248b31255d44ecd6a30066.jpg');  
+    background-repeat: cover;
+    background-size: contain;
   }
   
-  .searchBar {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .searchBar input {
-    flex-grow: 1;
-    padding: 5px;
-  }
-  
-  .searchBar button {
-    padding: 5px 10px;
-  }
 
   .grid {
-    border: 1px solid black;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-gap: 16px;
@@ -79,4 +73,11 @@
   .pagination button.active {
     background-color: #0870f8;
     color: #fff;
+  }
+
+  .center {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }

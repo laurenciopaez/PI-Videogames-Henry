@@ -7,6 +7,8 @@ function DetailPage({ name, image, landingDate, platform, onClose }) {
         onClose()
     }
 
+  const platformString = platform.join(", ");
+
   return (
     <>
       <div className={style.detail_page}>
@@ -15,7 +17,7 @@ function DetailPage({ name, image, landingDate, platform, onClose }) {
           <img src={image} alt="Imagen del videojuego" />
         </div>
         <p className={style.detail_page__landing_date}>{landingDate}</p>
-        <p className={style.detail_page__platform}>{platform}</p>
+        <p className={style.detail_page__platform}>{platformString}</p>
         <button className={style.detail_page__close_button} onClick={handleButtonClick}>
           X
         </button>

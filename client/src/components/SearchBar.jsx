@@ -2,9 +2,9 @@ import React, { useState } from "react";
 
 //redux
 import { connect } from "react-redux";
-import { pedirVideojuegosId,pedirVideojuegosName } from "../redux/actions";
+import { pedirVideojuegosId, pedirVideojuegosName } from "../redux/actions";
 //css
-import styles from "../styles/home.module.css";
+import styles from "../styles/searchbar.module.css";
 
 function SearchBar({ pedirVideojuegosId, pedirVideojuegosName }) {
   //almacenar valor de barra de busqueda
@@ -59,7 +59,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     pedirVideojuegosId: (id) => dispatch(pedirVideojuegosId(id)),
-    pedirVideojuegosName: (name) => dispatch(pedirVideojuegosName(name))
+    pedirVideojuegosName: (name) => dispatch(pedirVideojuegosName(name)),
   };
 };
 

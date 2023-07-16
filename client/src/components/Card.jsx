@@ -17,7 +17,7 @@ const Card = ({ name, image, landingDate, platform }) => {
     return (
       <DetailPage
         name={name}
-        image={image}x
+        image={image}
         landingDate={landingDate}
         platform={platform}
         onClose={handleDetailPageClose}
@@ -25,13 +25,15 @@ const Card = ({ name, image, landingDate, platform }) => {
     );
   }
 
+  const platformString = platform.join(", ");
+
   return (
     <>
       <div className={styles.card} onClick={handleClick}>
         <h3>{name}</h3>
         <img src={image} alt="Game" />
         <p>{landingDate}</p>
-        <p className={styles.platform}>{platform}</p>
+        <p className={styles.platform}>{platformString}</p>
       </div>
     </>
   );

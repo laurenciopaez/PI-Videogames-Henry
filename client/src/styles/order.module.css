@@ -1,0 +1,20 @@
+.orderBy {
+    display: flex;
+    align-items: center;
+  }
+  
+  .orderBy label {
+    margin-right: 10px;
+    font-size: 16px;
+  }
+  
+  .orderBy select {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .orderBy option {
+    font-size: 16px;
+  }

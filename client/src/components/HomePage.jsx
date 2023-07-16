@@ -40,17 +40,17 @@ const HomePage = ({
     <div className={styles.container}>
       {/* sidebar */}
       <div className={styles.sidebar}>
-        <h2>Order / Filter</h2>
+        <h2 className={styles.center}>Order / Filter</h2>
         <Order />
       </div>
       {/*search bar  */}
       <div className={styles.content}>
         <SearchBar />
         {/* Main content */}
-        <h2>Contenido principal</h2>
+        <h2 className={styles.center}>Main Content</h2>
         <div className={styles.grid}>
           {loading ? (
-            <p>Cargando...</p>
+            <p >Cargando...</p>
           ) : (
             currentItems.map((el) => (
               <Card

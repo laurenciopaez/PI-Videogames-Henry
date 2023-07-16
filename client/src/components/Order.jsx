@@ -4,7 +4,9 @@ import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import { orderByRating, orderByAlphabet  } from '../redux/actions';
 
-import styles from '../styles/home.module.css';
+import styles from '../styles/order.module.css'
+
+
 
 function Order({ orderByRating, orderByAlphabet }) {
     const [sortingType, setSortingType] =useState('')
@@ -26,18 +28,18 @@ function Order({ orderByRating, orderByAlphabet }) {
     }
 
     return (
-        <form>
-            <label>
-                Order by:
-                <select value={sortingType} onChange={handleSortingChange}>
-                    <option value="">Choose an option</option>
-                    <option value="alphabetic">Alphabetic order</option>
-                    <option value="rating">Rating order</option>
-                </select>
-            </label>
+        <form className={styles.orderBy}>
+          <label>
+            Order by:
+            <select value={sortingType} onChange={handleSortingChange}>
+              <option value="">Choose an option</option>
+              <option value="alphabetic">Alphabetic order</option>
+              <option value="rating">Rating order</option>
+            </select>
+          </label>
         </form>
-    )
-}
+      );
+    };
 
   //mapea las acciones de redux a las props del componente
   const mapDispatchToProps = (dispatch) => {
