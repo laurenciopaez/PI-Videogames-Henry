@@ -108,6 +108,7 @@ const getVideogameByName = async (req, res) => {
           [Op.like]: `%${name}%`,
         },
       },
+      attributes: ['name', 'description', 'platform', 'image', 'landingDate', 'rating'],
       limit: 5,
     });
 
@@ -115,6 +116,11 @@ const getVideogameByName = async (req, res) => {
     if (dbResponse.length > 0) {
       transformedDbResults = dbResponse.map((result) => ({
         name: result.name,
+        description: result.description,
+        platform: result.platform,
+        image: result.image,
+        landingDate: result.landingDate,
+        rating: result.rating,
         option: "FromBaseData: true",
       }));
     }
@@ -141,13 +147,13 @@ const getVideogameByName = async (req, res) => {
 };
 
 const createVideogames = async (req, res) => {
-  const { name, description, platform, image, landingDate, rating, genreName } =
+  const { name, description, platform, image, landingDate, rating, genre } =
     req.body;
 
   try {
-    const genre = await Genre.findOne({ where: { name: genreName } });
+    const genreS = await Genre.findOne({ where: { name: genre } });
 
-    if (!genre) {
+    if (!genreS) {
       //Si no existe el genero proporcionado
       return res
         .status(400)
@@ -163,11 +169,13 @@ const createVideogames = async (req, res) => {
       rating,
     });
 
-    await newVideogame.addGenre(genre);
+    await newVideogame.addGenre(genreS);
 
     res.status(200).json(newVideogame);
   } catch (error) {
+    console.log('Error de solicitud')
     res.status(400).json({ error: error.message });
+    
   }
 };
 

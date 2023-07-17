@@ -83,6 +83,20 @@ export const pedirVideojuegosName = (name) => {
   };
 };
 
+export const crearVideojuego = (data) => {
+  
+    console.log('Peticion de creacion aceptada en middleware')
+    axios
+    .post('http://localhost:3001/videogames', data)
+    .then( (response) => {
+      console.log('Creacion exitosa')
+    })
+    .catch( (error) => {
+      console.log(error)
+    })
+  }
+
+
 // ordenamiento
 
 export const orderByRating = () => ({ type: ORDER_BY_RATING });

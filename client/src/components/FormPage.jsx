@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "../styles/form.module.css";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { imageVerifier } from "../redux/actions";
+import { imageVerifier, crearVideojuego } from "../redux/actions";
 
 function FormPage({
   /* variables */ imageErrorG,
@@ -47,6 +47,18 @@ function FormPage({
       !genreError
     ) {
       console.log("enviado");
+      
+      const data = {
+        name: values.name,
+        description: values.description,
+        platform: values.platform,
+        image: values.image,
+        landingDate: values.landingDate,
+        rating: values.rating,
+        genre: values.genre,
+    }
+    console.log(data)
+      crearVideojuego(data)
     }
     //validaciones asincronas
   };
@@ -287,6 +299,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     imageVerifier: (data) => dispatch(imageVerifier(data)),
+    crearVideojuego: (data) => dispatch(crearVideojuego(data))
   };
 };
 
