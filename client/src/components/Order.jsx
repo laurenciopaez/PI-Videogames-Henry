@@ -48,17 +48,25 @@ function Order({ orderByRating, orderByAlphabet, orderByAlphabetD }) {
           Order by genre:
           <select>
             <option value="">Choose an option</option>
-            <option></option>
-            <option></option>
-            <option></option>
-            <option></option>
-            <option></option>
-            <option></option>
-            <option></option>
-            <option></option>
-            <option></option>
-            <option></option>
-            <option></option>
+            <option>Action</option>
+            <option>Adventure</option>
+            <option>RPG</option>
+            <option>Shooter</option>
+            <option>Puzzle</option>
+            <option>Indie</option>
+            <option>Platformer</option>
+            <option>Massively Multiplayer</option>
+            <option>Sports</option>
+            <option>Racing</option>
+            <option>Simulation</option>
+            <option>Arcade</option>
+            <option>Casual</option>
+            <option>Fighting</option>
+            <option>Strategy</option>
+            <option>Family</option>
+            <option>Educational</option>
+            <option>Card</option>
+            <option>Board Games</option>
           </select>
         </label>
       </form>

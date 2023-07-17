@@ -4,7 +4,10 @@ import styles from "../styles/form.module.css";
 import { connect } from "react-redux";
 import { imageVerifier } from "../redux/actions";
 
-function FormPage({ /* variables */ imageErrorG, /* funciones asyncronas  */ imageVerifier }) {
+function FormPage({
+  /* variables */ imageErrorG,
+  /* funciones asyncronas  */ imageVerifier,
+}) {
   const [values, setValues] = useState({
     name: "",
     nameError: false,
@@ -58,15 +61,15 @@ function FormPage({ /* variables */ imageErrorG, /* funciones asyncronas  */ ima
       setValues((prevState) => ({ ...prevState, descriptionError: false }));
     }
 
-    if (name === "platform" && value.length > 200) {
-      setValues((prevState) => ({ ...prevState, descriptionError: true }));
+    if (name === "platform" && value.length > 20) {
+      setValues((prevState) => ({ ...prevState, platformError: true }));
     } else {
-      setValues((prevState) => ({ ...prevState, descriptionError: false }));
+      setValues((prevState) => ({ ...prevState, platformError: false }));
     }
 
     if (name === "image") {
-        console.log('Verificando imagen con URL: '+value)
-        imageVerifier(value)
+      console.log("Verificando imagen con URL: " + value);
+      imageVerifier(value);
     }
   };
 
@@ -116,6 +119,11 @@ function FormPage({ /* variables */ imageErrorG, /* funciones asyncronas  */ ima
           onBlur={handleBlur}
           required
         />
+        {platformError && (
+          <p className={styles.error}>
+            Platform description should not exceed 20 characters
+          </p>
+        )}
 
         <label htmlFor="image">Image:</label>
         <input
@@ -156,16 +164,35 @@ function FormPage({ /* variables */ imageErrorG, /* funciones asyncronas  */ ima
         />
 
         <label htmlFor="genreName">Genre:</label>
-        <input
-          type="text"
+        <select
           id="genreName"
           name="genreName"
-          placeholder="Genre"
-          value={values.genre}
+          value={values.genreName}
           onChange={handleChange}
           onBlur={handleBlur}
           required
-        />
+        >
+          <option value="">Choose an option</option>
+          <option value="Action">Action</option>
+          <option value="Adventure">Adventure</option>
+          <option value="RPG">RPG</option>
+          <option value="Shooter">Shooter</option>
+          <option value="Puzzle">Puzzle</option>
+          <option value="Indie">Indie</option>
+          <option value="Platformer">Platformer</option>
+          <option value="Massively Multiplayer">Massively Multiplayer</option>
+          <option value="Sports">Sports</option>
+          <option value="Racing">Racing</option>
+          <option value="Simulation">Simulation</option>
+          <option value="Arcade">Arcade</option>
+          <option value="Casual">Casual</option>
+          <option value="Fighting">Fighting</option>
+          <option value="Strategy">Strategy</option>
+          <option value="Family">Family</option>
+          <option value="Educational">Educational</option>
+          <option value="Card">Card</option>
+          <option value="Board Games">Board Games</option>
+        </select>
 
         <input type="submit" value="Crear Videojuego" />
       </form>

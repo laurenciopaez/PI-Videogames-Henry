@@ -198,7 +198,7 @@ const descriptionMaker = async (req, res) => {
 };
 
 const imageVerifier = async (req, res) => {
-  const { url } = req.query.url;
+  const { url } = req.query;
   console.log('Solicitud aceptada, enviando a url: '+url)
   try {
     const response = await axios.head(url)

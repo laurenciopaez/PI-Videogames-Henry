@@ -11,7 +11,7 @@ export default function verifiersReducer(state = initialState, action) {
         case IMAGE_VERIFIER: {
             return {
                 ...state,
-                imageError: action.payload,
+                imageError: !action.payload,
             }
         };
         default: 

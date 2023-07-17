@@ -119,9 +119,10 @@ export const descriptionMaker = (data) => {
 export const imageVerifier = (data) => {
   return (dispatch) => {
     console.log('despachado solicitud a servidor: '+data)
-    axios
-      .get(`http://localhost:3001/videogames/verifier?url=${data}`)
+    axios //encodeURIComponent: codifica la url por las dudas
+      .get(`http://localhost:3001/videogames/verifier?url=${encodeURIComponent(data)}`)
       .then((response) => {
+        console.log(response)
         dispatch({
           type: IMAGE_VERIFIER,
           payload: response.data.isValid,
