@@ -25,7 +25,7 @@ function DetailPage({
     descriptionMaker(description);
   }, [descriptionMaker]);
 
-  const platformString = platform.join(", ");
+  const platformString = platform && platform.join(", ");
 
   return (
     <>

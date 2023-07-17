@@ -122,11 +122,11 @@ const getVideogameByName = async (req, res) => {
     const games = results.map((game) => ({
       id: game.id,
       name: game.name,
-      description: game.description_raw,
+      description: game.tags.map((tag) => tag.name),
       image: game.background_image,
-      released: game.released,
+      landingDate: game.released,
       rating: game.rating,
-      platforms: game.platforms.map((platform) => platform.platform.name),
+      platform: game.platforms.map((platform) => platform.platform.name),
       genres: game.genres.map((genre) => genre.name),
     }));
 

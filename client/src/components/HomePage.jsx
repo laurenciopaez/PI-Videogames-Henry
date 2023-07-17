@@ -51,6 +51,8 @@ const HomePage = ({
           {/* Main content */}
           <h2 className={styles.center} style={{ color: 'white' }}>Main Content</h2>
           <div className={styles.grid}>
+
+            {/* Loading code */}
             {loading
               ? Array.from({ length: itemsPerPage }).map((_, index) => (
                   <div key={index} className={styles.loadingCard}>

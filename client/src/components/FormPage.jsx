@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "../styles/form.module.css";
-
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { imageVerifier } from "../redux/actions";
 
@@ -28,10 +28,25 @@ function FormPage({
   const handleSubmit = (e) => {
     e.preventDefault(); //previene el comportamiento default el cual recarga la pagina
 
-    const {nameError, descriptionError, platformError, landingDateError, ratingError, genreError} = values;
+    const {
+      nameError,
+      descriptionError,
+      platformError,
+      landingDateError,
+      ratingError,
+      genreError,
+    } = values;
 
-    if(!nameError && !descriptionError && !platformError && !imageErrorG && !landingDateError && !ratingError && !genreError ){
-        console.log('enviado')
+    if (
+      !nameError &&
+      !descriptionError &&
+      !platformError &&
+      !imageErrorG &&
+      !landingDateError &&
+      !ratingError &&
+      !genreError
+    ) {
+      console.log("enviado");
     }
     //validaciones asincronas
   };
@@ -76,52 +91,59 @@ function FormPage({
       console.log("Verificando imagen con URL: " + value);
       imageVerifier(value);
     }
-    if (name === 'landingDate') {
-        const selectedDate = new Date(value);
-    
-        if (selectedDate.getFullYear() < 1970) {
-          setValues((prevState) => ({
-            ...prevState,
-            landingDateError: true,
-          }));
-        } else {
-          setValues((prevState) => ({
-            ...prevState,
-            landingDateError: false,
-          }));
-        }
-      }
+    if (name === "landingDate") {
+      const selectedDate = new Date(value);
 
-    if(name === 'rating') {
-        if(value>5 || value<0) {
-            setValues((prevState) => ({
-                ...prevState,
-                ratingError: true,
-            }))
-        } else {
-            setValues((prevState) => ({
-                ...prevState,
-                ratingError: false,
-            }))
-        }
+      if (selectedDate.getFullYear() < 1970) {
+        setValues((prevState) => ({
+          ...prevState,
+          landingDateError: true,
+        }));
+      } else {
+        setValues((prevState) => ({
+          ...prevState,
+          landingDateError: false,
+        }));
+      }
     }
 
-    if(name === 'genre' && value === "" ) {
+    if (name === "rating") {
+      if (value > 5 || value < 0) {
         setValues((prevState) => ({
-            ...prevState,
-            genreError: true,
-        }))
+          ...prevState,
+          ratingError: true,
+        }));
+      } else {
+        setValues((prevState) => ({
+          ...prevState,
+          ratingError: false,
+        }));
+      }
+    }
+
+    if (name === "genre" && value === "") {
+      setValues((prevState) => ({
+        ...prevState,
+        genreError: true,
+      }));
     } else {
-        setValues((prevState) => ({
-            ...prevState,
-            genreError: false,
-        }))
+      setValues((prevState) => ({
+        ...prevState,
+        genreError: false,
+      }));
     }
   };
 
   return (
+    <>
     <div className={styles.container}>
-      <h1>Create Videogame</h1>
+    <button className={styles.goback}>
+          <Link style={{ color: 'white', textDecoration: 'none' }} to="/home">
+            Back Home
+          </Link>
+        </button>
+    
+      <h1 className={styles.title}>Create Videogame</h1>
       <form className={styles.form} onSubmit={handleSubmit}>
         <label htmlFor="name">Name:</label>
         <input
@@ -197,9 +219,7 @@ function FormPage({
           required
         />
         {values.landingDateError && (
-            <p className={styles.error}>
-                Any game was created before 1970
-            </p>
+          <p className={styles.error}>Any game was created before 1970</p>
         )}
 
         <label htmlFor="rating">Rating:</label>
@@ -213,10 +233,8 @@ function FormPage({
           onBlur={handleBlur}
           required
         />
-         {values.ratingError && (
-            <p className={styles.error}>
-                Rating has to be between 0 and 5
-            </p>
+        {values.ratingError && (
+          <p className={styles.error}>Rating has to be between 0 and 5</p>
         )}
 
         <label htmlFor="genre">Genre:</label>
@@ -251,14 +269,13 @@ function FormPage({
         </select>
 
         {values.genreError && (
-            <p className={styles.error}>
-                You must choose one
-            </p>
+          <p className={styles.error}>You must choose one</p>
         )}
 
         <input type="submit" value="Crear Videojuego" />
       </form>
     </div>
+    </>
   );
 }
 

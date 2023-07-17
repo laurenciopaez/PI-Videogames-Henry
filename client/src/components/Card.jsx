@@ -28,8 +28,11 @@ const Card = ({ name, image, landingDate, platform, rating, description }) => {
       />
     );
   }
-
-  const platformString = platform.join(", ");
+let platformString = '';
+  if(platform !== undefined) {
+     platformString = platform.join(", ");
+  }
+  
 
   return (
     <>
