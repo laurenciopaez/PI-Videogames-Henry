@@ -10,6 +10,7 @@ import {
   ORDER_BY_RATING,
   ORDER_BY_DALPHABET,
   DESCRIPTION_MAKER,
+  IMAGE_VERIFIER,
 } from "../../types/index";
 
 import axios from "axios";
@@ -93,6 +94,7 @@ export const orderByAlphabetD = () => ({ type: ORDER_BY_DALPHABET });
 //description maker
 
 export const descriptionMaker = (data) => {
+
   return (dispatch) => {
     axios
       .get("http://localhost:3001/videogames/OpenAi", {
@@ -107,6 +109,25 @@ export const descriptionMaker = (data) => {
       })
       .catch((error) => {
         // Manejar errores de la solicitud
+        console.error(error);
+      });
+  };
+};
+
+//verifier
+
+export const imageVerifier = (data) => {
+  return (dispatch) => {
+    console.log('despachado solicitud a servidor: '+data)
+    axios
+      .get(`http://localhost:3001/videogames/verifier?url=${data}`)
+      .then((response) => {
+        dispatch({
+          type: IMAGE_VERIFIER,
+          payload: response.data.isValid,
+        });
+      })
+      .catch((error) => {
         console.error(error);
       });
   };

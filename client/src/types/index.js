@@ -23,3 +23,7 @@ export const ORDER_BY_DALPHABET = "ORDER_BY_DALPHABET";
 //Chat gpt get
 
 export const DESCRIPTION_MAKER = "DESCRIPTION_MAKER";
+
+//Form verifier
+
+export const IMAGE_VERIFIER = 'IMAGE_VERIFIER';

@@ -6,9 +6,12 @@ const {
   getVideogameById,
   getVideogameByName,
   descriptionMaker,
+  imageVerifier,
 } = require("../controllers/videogames.controller");
 
 const videogamesRouter = Router();
+
+videogamesRouter.get('/verifier', imageVerifier)
 
 videogamesRouter.get("/openAi", descriptionMaker);
 

@@ -197,10 +197,28 @@ const descriptionMaker = async (req, res) => {
   }
 };
 
+const imageVerifier = async (req, res) => {
+  const { url } = req.query.url;
+  console.log('Solicitud aceptada, enviando a url: '+url)
+  try {
+    const response = await axios.head(url)
+    const contentType = response.headers['content-type'];
+    if (contentType && contentType.startsWith('image')) {
+      res.json({ isValid: true })// La URL es una imagen válida
+    } else {
+      res.json({ isValid: false}) // La URL no es una imagen válida
+    }
+  } catch (error) {
+    console.error('Error al validar la imagen:', error.message);
+    res.json({ isValid: false, error: error.message}) // Ocurrió un error al realizar la solicitud
+  }
+}
+
 module.exports = {
   getVideogames,
   createVideogames,
   getVideogameById,
   getVideogameByName,
   descriptionMaker,
+  imageVerifier,
 };
