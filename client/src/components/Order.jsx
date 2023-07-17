@@ -44,35 +44,33 @@ function Order({ orderByRating, orderByAlphabet, orderByAlphabetD }) {
         </label>
       </form>
       <form className={styles.orderBy}>
-        <label>
-          Order by genre:
-          <select>
-            <option value="">Choose an option</option>
-            <option>Action</option>
-            <option>Adventure</option>
-            <option>RPG</option>
-            <option>Shooter</option>
-            <option>Puzzle</option>
-            <option>Indie</option>
-            <option>Platformer</option>
-            <option>Massively Multiplayer</option>
-            <option>Sports</option>
-            <option>Racing</option>
-            <option>Simulation</option>
-            <option>Arcade</option>
-            <option>Casual</option>
-            <option>Fighting</option>
-            <option>Strategy</option>
-            <option>Family</option>
-            <option>Educational</option>
-            <option>Card</option>
-            <option>Board Games</option>
-          </select>
-        </label>
+        <label htmlFor="genre">Filter by genre:</label>
+        <select id="genre" name="genre">
+          <option value="">Choose an option</option>
+          <option value="Action">Action</option>
+          <option value="Adventure">Adventure</option>
+          <option value="RPG">RPG</option>
+          <option value="Shooter">Shooter</option>
+          <option value="Puzzle">Puzzle</option>
+          <option value="Indie">Indie</option>
+          <option value="Platformer">Platformer</option>
+          <option value="Massively Multiplayer">Massively Multiplayer</option>
+          <option value="Sports">Sports</option>
+          <option value="Racing">Racing</option>
+          <option value="Simulation">Simulation</option>
+          <option value="Arcade">Arcade</option>
+          <option value="Casual">Casual</option>
+          <option value="Fighting">Fighting</option>
+          <option value="Strategy">Strategy</option>
+          <option value="Family">Family</option>
+          <option value="Educational">Educational</option>
+          <option value="Card">Card</option>
+          <option value="Board Games">Board Games</option>
+        </select>
       </form>
-      <div >
+      <div>
         <button className={styles.button}>
-          <Link style={{ color: 'white', textDecoration: 'none' }} to="/create">
+          <Link style={{ color: "white", textDecoration: "none" }} to="/create">
             Create Videogame
           </Link>
         </button>

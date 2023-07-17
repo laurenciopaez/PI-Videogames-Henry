@@ -40,7 +40,7 @@ const HomePage = ({
         <div className={styles.sidebar}>
           <h2 className={styles.center}>Order / Filter</h2>
           <Order />
-          <div>
+          <div className={styles.sidebarFooter}>
             <p>With love by: Laurencio Paez</p>
             <p>Using: RAGW and OpenAi</p>
           </div>
@@ -69,6 +69,8 @@ const HomePage = ({
                     platform={el.platform}
                     rating={el.rating}
                     description={el.description}
+                    genre={el.genres}
+                    //generos ACA
                   />
                 ))}
           </div>

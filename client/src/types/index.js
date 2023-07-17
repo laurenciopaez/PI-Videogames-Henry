@@ -1,7 +1,3 @@
-//favoritos reducer
-export const DELETE = "DELETE";
-export const ADD = "ADD";
-
 //info server reducer
 //Get videogames request
 export const GET_VIDEOGAMES_REQUEST = "GET_VIDEOGAMES_REQUEST";

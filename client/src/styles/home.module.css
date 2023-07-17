@@ -12,8 +12,12 @@
 .sidebar {
   width: 15vw;
   background-color: #f2f2f2;
-  padding: 20px;
-  height: 100vh;
+  padding: 25px;
+}
+
+.sidebarFooter {
+  position: fixed;
+  top: 90vh;
 }
 
 .content {

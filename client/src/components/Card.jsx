@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "../styles/cards.module.css";
 import DetailPage from "./DetailPage";
 
-const Card = ({ name, image, landingDate, platform, rating, description }) => {
+const Card = ({ name, image, landingDate, platform, rating, genre,description }) => {
   const [showDetailPage, setShownDetailPage] = useState(false);
 
   const handleClick = () => {
@@ -22,26 +22,22 @@ const Card = ({ name, image, landingDate, platform, rating, description }) => {
         landingDate={landingDate}
         platform={platform}
         rating={rating}
+        genre = {genre}
         //se pasa la descripcion con los tags
         description={description}
         onClose={handleDetailPageClose}
       />
     );
   }
-let platformString = '';
-  if(platform !== undefined) {
-     platformString = platform.join(", ");
-  }
-  
+
+  const genresString = genre && genre.join(", ");
 
   return (
     <>
       <div className={styles.card} onClick={handleClick}>
         <h3>{name}</h3>
         <img src={image} alt="Game" />
-        <p>Rating: {rating}</p>
-        <p>Landing Date: {landingDate}</p>
-        <p className={styles.platform}>Platforms: {platformString}</p>
+        <p className={styles.platform}>Genres: {genresString}</p>
       </div>
     </>
   );

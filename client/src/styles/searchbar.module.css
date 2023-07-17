@@ -1,12 +1,9 @@
 .searchBar {
   display: flex;
-  align-items: center;
   margin-bottom: 20px;
 }
 
 .searchBar form {
-  display: flex;
-  align-items: center;
   width: 100%;
 }
 

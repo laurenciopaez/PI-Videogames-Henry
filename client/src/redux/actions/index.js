@@ -1,6 +1,4 @@
 import {
-  ADD,
-  DELETE,
   GET_VIDEOGAMES_REQUEST,
   GET_VIDEOGAMES_ID_REQUEST,
   GET_VIDEOGAMES_SUCCESS,
@@ -14,11 +12,6 @@ import {
 } from "../../types/index";
 
 import axios from "axios";
-//favoritos reducer
-
-export const eliminar = (id) => ({ type: DELETE, payload: id });
-
-export const agregar = (id) => ({ type: ADD, payload: id });
 
 // info server reducer
 

@@ -9,6 +9,7 @@ function DetailPage({
   image,
   landingDate,
   platform,
+  genre,
   /* description: tags */ description,
   onClose,
   /* funcion que pide la descripcion armada por chat gpt */
@@ -26,6 +27,7 @@ function DetailPage({
   }, [descriptionMaker]);
 
   const platformString = platform && platform.join(", ");
+  const genresString = genre && genre.join(", ");
 
   return (
     <>
@@ -39,6 +41,9 @@ function DetailPage({
         </p>
         <p className={style.detail_page__platform}>
           Plataforms: {platformString}
+        </p>
+        <p className={style.detail_page__platform}>
+          Genres: {genresString}
         </p>
         <p className={style.detail_page__description}>
           Description: {trueDescription.toString()}

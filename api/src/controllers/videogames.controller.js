@@ -41,6 +41,7 @@ const getVideogames = async (req, res) => {
               image: response.data.results[i].background_image,
               landingDate: response.data.results[i].released,
               rating: response.data.results[i].rating,
+              genres: response.data.results[i].genres.map((genre) => genre.name),
             };
             arregloVideogames.push(videogame);
           } else {
@@ -83,6 +84,7 @@ const getVideogameById = async (req, res) => {
       image: response.data.background_image,
       landingDate: response.data.released,
       rating: response.data.rating,
+      genres: response.data.genres.map((genre) => genre.name),
     };
     console.log("id");
     res.send(videogame);
