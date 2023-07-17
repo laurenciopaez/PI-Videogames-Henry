@@ -28,6 +28,11 @@ function FormPage({
   const handleSubmit = (e) => {
     e.preventDefault(); //previene el comportamiento default el cual recarga la pagina
 
+    const {nameError, descriptionError, platformError, landingDateError, ratingError, genreError} = values;
+
+    if(!nameError && !descriptionError && !platformError && !imageErrorG && !landingDateError && !ratingError && !genreError ){
+        console.log('enviado')
+    }
     //validaciones asincronas
   };
 
@@ -70,6 +75,47 @@ function FormPage({
     if (name === "image") {
       console.log("Verificando imagen con URL: " + value);
       imageVerifier(value);
+    }
+    if (name === 'landingDate') {
+        const selectedDate = new Date(value);
+    
+        if (selectedDate.getFullYear() < 1970) {
+          setValues((prevState) => ({
+            ...prevState,
+            landingDateError: true,
+          }));
+        } else {
+          setValues((prevState) => ({
+            ...prevState,
+            landingDateError: false,
+          }));
+        }
+      }
+
+    if(name === 'rating') {
+        if(value>5 || value<0) {
+            setValues((prevState) => ({
+                ...prevState,
+                ratingError: true,
+            }))
+        } else {
+            setValues((prevState) => ({
+                ...prevState,
+                ratingError: false,
+            }))
+        }
+    }
+
+    if(name === 'genre' && value === "" ) {
+        setValues((prevState) => ({
+            ...prevState,
+            genreError: true,
+        }))
+    } else {
+        setValues((prevState) => ({
+            ...prevState,
+            genreError: false,
+        }))
     }
   };
 
@@ -119,7 +165,7 @@ function FormPage({
           onBlur={handleBlur}
           required
         />
-        {platformError && (
+        {values.platformError && (
           <p className={styles.error}>
             Platform description should not exceed 20 characters
           </p>
@@ -150,6 +196,11 @@ function FormPage({
           onBlur={handleBlur}
           required
         />
+        {values.landingDateError && (
+            <p className={styles.error}>
+                Any game was created before 1970
+            </p>
+        )}
 
         <label htmlFor="rating">Rating:</label>
         <input
@@ -162,11 +213,16 @@ function FormPage({
           onBlur={handleBlur}
           required
         />
+         {values.ratingError && (
+            <p className={styles.error}>
+                Rating has to be between 0 and 5
+            </p>
+        )}
 
-        <label htmlFor="genreName">Genre:</label>
+        <label htmlFor="genre">Genre:</label>
         <select
-          id="genreName"
-          name="genreName"
+          id="genre"
+          name="genre"
           value={values.genreName}
           onChange={handleChange}
           onBlur={handleBlur}
@@ -193,6 +249,12 @@ function FormPage({
           <option value="Card">Card</option>
           <option value="Board Games">Board Games</option>
         </select>
+
+        {values.genreError && (
+            <p className={styles.error}>
+                You must choose one
+            </p>
+        )}
 
         <input type="submit" value="Crear Videojuego" />
       </form>
