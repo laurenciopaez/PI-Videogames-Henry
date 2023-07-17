@@ -16,6 +16,10 @@ export const ORDER_BY_RATING = "ORDER_BY_RATING";
 export const ORDER_BY_ALPHABET = "ORDER_BY_ALPHABET";
 export const ORDER_BY_DALPHABET = "ORDER_BY_DALPHABET";
 
+// FILTER
+
+export const FILTER_BY_GENRE = "FILTER_BY_GENRE";
+
 //Chat gpt get
 
 export const DESCRIPTION_MAKER = "DESCRIPTION_MAKER";

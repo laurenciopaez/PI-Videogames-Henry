@@ -9,6 +9,7 @@ import {
   ORDER_BY_DALPHABET,
   DESCRIPTION_MAKER,
   IMAGE_VERIFIER,
+  FILTER_BY_GENRE,
 } from "../../types/index";
 
 import axios from "axios";
@@ -97,6 +98,10 @@ export const orderByRating = () => ({ type: ORDER_BY_RATING });
 export const orderByAlphabet = () => ({ type: ORDER_BY_ALPHABET });
 
 export const orderByAlphabetD = () => ({ type: ORDER_BY_DALPHABET });
+
+// Filter
+
+export const filterByGenre = (data) => ({type: FILTER_BY_GENRE, payload: data})
 
 //description maker
 

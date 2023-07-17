@@ -8,6 +8,7 @@ import {
   ORDER_BY_RATING,
   ORDER_BY_DALPHABET,
   DESCRIPTION_MAKER,
+  FILTER_BY_GENRE,
 } from "../../types";
 
 const initialState = {
@@ -60,10 +61,10 @@ export default function infoServerReducer(state = initialState, action) {
         const ratingA = a.rating;
         const ratingB = b.rating;
 
-        if (ratingA < ratingB) {
+        if (ratingA > ratingB) {
           return -1;
         }
-        if (ratingA > ratingB) {
+        if (ratingA < ratingB) {
           return 1;
         }
         return 0;
@@ -109,6 +110,16 @@ export default function infoServerReducer(state = initialState, action) {
         ...state,
         trueDescription: action.payload,
       };
+    }
+    case FILTER_BY_GENRE: {
+      const filteredVideogames = state.videogames100.filter((game) => {
+         return game.genres.includes(action.payload)
+      })
+      console.log(filteredVideogames)
+      return {
+        ...state, 
+        videogames100: filteredVideogames
+      }
     }
     default:
       return state;

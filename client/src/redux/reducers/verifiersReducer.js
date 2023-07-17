@@ -8,12 +8,11 @@ const initialState = {
 
 export default function verifiersReducer(state = initialState, action) {
     switch(action.type) {
-        case IMAGE_VERIFIER: {
+        case IMAGE_VERIFIER: 
             return {
                 ...state,
                 imageError: !action.payload,
             }
-        };
         default: 
             return state;
     }

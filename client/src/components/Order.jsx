@@ -6,13 +6,23 @@ import {
   orderByRating,
   orderByAlphabet,
   orderByAlphabetD,
+  filterByGenre,
+  pedirVideojuegos,
 } from "../redux/actions";
 
 import styles from "../styles/order.module.css";
 
 //Se comunica con el redux y reordena el array videojuegos100 segun la opcion seleccionada
-function Order({ orderByRating, orderByAlphabet, orderByAlphabetD }) {
+function Order({
+  orderByRating,
+  orderByAlphabet,
+  orderByAlphabetD,
+  filterByGenre,
+  pedirVideojuegos,
+}) {
   const [sortingType, setSortingType] = useState("");
+  const [filterType, setFilterType] = useState("");
+  const [databaseFilterType, setDBType] = useState("");
 
   const handleSortingChange = (event) => {
     const selectedSortingType = event.target.value;
@@ -30,6 +40,21 @@ function Order({ orderByRating, orderByAlphabet, orderByAlphabetD }) {
     }
   };
 
+  const handleChange = (event) => {
+    const selectedFilterType = event.target.value;
+    setFilterType(selectedFilterType);
+    if (selectedFilterType === "") {
+      pedirVideojuegos();
+    } else {
+      filterByGenre(selectedFilterType);
+    }
+  };
+
+  const handleFilterChange = (event) => {
+    const databaseFilterType = event.target.value;
+    setDBType(databaseFilterType);
+  };
+
   return (
     <>
       <form className={styles.orderBy}>
@@ -43,7 +68,11 @@ function Order({ orderByRating, orderByAlphabet, orderByAlphabetD }) {
           </select>
         </label>
       </form>
-      <form className={styles.orderBy}>
+      <form
+        className={styles.orderBy}
+        value={filterType}
+        onChange={handleChange}
+      >
         <label htmlFor="genre">Filter by genre:</label>
         <select id="genre" name="genre">
           <option value="">Choose an option</option>
@@ -68,6 +97,17 @@ function Order({ orderByRating, orderByAlphabet, orderByAlphabetD }) {
           <option value="Board Games">Board Games</option>
         </select>
       </form>
+      <form
+        className={styles.orderBy}
+        value={databaseFilterType}
+        onChange={handleFilterChange}
+      >
+        <label htmlFor="database">From Database?</label>
+        <select id="database" name="database">
+          <option value="">No worry</option>
+          <option value="true">Yes</option>
+        </select>
+      </form>
       <div>
         <button className={styles.button}>
           <Link style={{ color: "white", textDecoration: "none" }} to="/create">
@@ -85,6 +125,8 @@ const mapDispatchToProps = (dispatch) => {
     orderByAlphabet: () => dispatch(orderByAlphabet()),
     orderByRating: () => dispatch(orderByRating()),
     orderByAlphabetD: () => dispatch(orderByAlphabetD()),
+    filterByGenre: (data) => dispatch(filterByGenre(data)),
+    pedirVideojuegos: () => dispatch(pedirVideojuegos()),
   };
 };
 

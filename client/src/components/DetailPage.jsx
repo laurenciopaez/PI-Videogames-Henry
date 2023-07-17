@@ -10,6 +10,7 @@ function DetailPage({
   landingDate,
   platform,
   genre,
+  rating,
   /* description: tags */ description,
   onClose,
   /* funcion que pide la descripcion armada por chat gpt */
@@ -41,6 +42,9 @@ function DetailPage({
         </p>
         <p className={style.detail_page__platform}>
           Plataforms: {platformString}
+        </p>
+        <p className={style.detail_page__platform}>
+          Rating: {rating}
         </p>
         <p className={style.detail_page__platform}>
           Genres: {genresString}
