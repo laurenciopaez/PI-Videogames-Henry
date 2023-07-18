@@ -9,6 +9,7 @@ import {
   ORDER_BY_DALPHABET,
   DESCRIPTION_MAKER,
   FILTER_BY_GENRE,
+  DATABASE_FILTER,
 } from "../../types";
 
 const initialState = {
@@ -118,6 +119,15 @@ export default function infoServerReducer(state = initialState, action) {
       console.log(filteredVideogames)
       return {
         ...state, 
+        videogames100: filteredVideogames
+      }
+    }
+    case DATABASE_FILTER: {
+      const filteredVideogames = state.videogames100.filter( (game) => {
+        return game.hasOwnProperty('option');
+      })
+      return {
+        ...state,
         videogames100: filteredVideogames
       }
     }

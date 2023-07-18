@@ -10,6 +10,7 @@ import {
   DESCRIPTION_MAKER,
   IMAGE_VERIFIER,
   FILTER_BY_GENRE,
+  DATABASE_FILTER
 } from "../../types/index";
 
 import axios from "axios";
@@ -83,6 +84,7 @@ export const crearVideojuego = (data) => {
     axios
     .post('http://localhost:3001/videogames', data)
     .then( (response) => {
+      alert('Creacion Exitosa')
       console.log('Creacion exitosa')
     })
     .catch( (error) => {
@@ -102,6 +104,8 @@ export const orderByAlphabetD = () => ({ type: ORDER_BY_DALPHABET });
 // Filter
 
 export const filterByGenre = (data) => ({type: FILTER_BY_GENRE, payload: data})
+
+export const setDBType = () => ({type: DATABASE_FILTER})
 
 //description maker
 

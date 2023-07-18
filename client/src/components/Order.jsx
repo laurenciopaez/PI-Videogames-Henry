@@ -8,6 +8,7 @@ import {
   orderByAlphabetD,
   filterByGenre,
   pedirVideojuegos,
+  setDBType,
 } from "../redux/actions";
 
 import styles from "../styles/order.module.css";
@@ -19,11 +20,13 @@ function Order({
   orderByAlphabetD,
   filterByGenre,
   pedirVideojuegos,
+  setDBType,
 }) {
   const [sortingType, setSortingType] = useState("");
   const [filterType, setFilterType] = useState("");
-  const [databaseFilterType, setDBType] = useState("");
+  const [databaseFilterType, setDataBType] = useState("");
 
+  //maneja los ordenamientos
   const handleSortingChange = (event) => {
     const selectedSortingType = event.target.value;
     setSortingType(selectedSortingType);
@@ -40,6 +43,7 @@ function Order({
     }
   };
 
+  //maneja los filtros
   const handleChange = (event) => {
     const selectedFilterType = event.target.value;
     setFilterType(selectedFilterType);
@@ -50,13 +54,18 @@ function Order({
     }
   };
 
+  //maneja el filtro de data base
   const handleFilterChange = (event) => {
     const databaseFilterType = event.target.value;
-    setDBType(databaseFilterType);
+    if(databaseFilterType === "true") {
+      console.log('From database: yes')
+      setDBType(databaseFilterType);
+    }
   };
 
   return (
     <>
+    {/* filtro de ordenamiento */}
       <form className={styles.orderBy}>
         <label>
           Order by:
@@ -68,6 +77,7 @@ function Order({
           </select>
         </label>
       </form>
+      {/* filtro de genero */}
       <form
         className={styles.orderBy}
         value={filterType}
@@ -97,18 +107,22 @@ function Order({
           <option value="Board Games">Board Games</option>
         </select>
       </form>
+      {/* filtro de procedencia */}
       <form
         className={styles.orderBy}
         value={databaseFilterType}
         onChange={handleFilterChange}
       >
-        <label htmlFor="database">From Database?</label>
+        <label htmlFor="database">
+          From Database?
+        </label>
         <select id="database" name="database">
           <option value="">No worry</option>
           <option value="true">Yes</option>
         </select>
       </form>
       <div>
+        {/* boton para crear videogame */}
         <button className={styles.button}>
           <Link style={{ color: "white", textDecoration: "none" }} to="/create">
             Create Videogame
@@ -127,6 +141,7 @@ const mapDispatchToProps = (dispatch) => {
     orderByAlphabetD: () => dispatch(orderByAlphabetD()),
     filterByGenre: (data) => dispatch(filterByGenre(data)),
     pedirVideojuegos: () => dispatch(pedirVideojuegos()),
+    setDBType: () => dispatch(setDBType())
   };
 };
 

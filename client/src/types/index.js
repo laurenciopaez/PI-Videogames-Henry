@@ -19,6 +19,7 @@ export const ORDER_BY_DALPHABET = "ORDER_BY_DALPHABET";
 // FILTER
 
 export const FILTER_BY_GENRE = "FILTER_BY_GENRE";
+export const DATABASE_FILTER = 'DATABASE_FILTER';
 
 //Chat gpt get
 

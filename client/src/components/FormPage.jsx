@@ -60,6 +60,24 @@ function FormPage({
     console.log(data)
       crearVideojuego(data)
     }
+
+    setValues({
+      name: "",
+      nameError: false,
+      description: "",
+      descriptionError: false,
+      platform: "",
+      platformError: false,
+      image: "",
+      landingDate: "",
+      landingDateError: false,
+      rating: 0,
+      ratingError: false,
+      genre: "",
+      genreError: false,
+    });
+
+    
     //validaciones asincronas
   };
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import style from "../styles/detail.module.css";
 
 import { connect } from "react-redux";
@@ -18,17 +18,24 @@ function DetailPage({
   /* estado global de la description de 'x' tarjeta hecha por chat gpt */
   trueDescription,
 }) {
+  const [descriptionType, setDescriptionType] = useState(false);
+
   const handleButtonClick = () => {
     onClose();
   };
 
   //una vez que carga el modulo envia la informacion al action para crear la descripcion con AI
   useEffect(() => {
-    descriptionMaker(description);
+    if (typeof description === "string") {
+      setDescriptionType(true);
+    } else {
+      descriptionMaker(description);
+    }
   }, [descriptionMaker]);
 
-  const platformString = platform && platform.join(", ");
-  const genresString = genre && genre.join(", ");
+  const platformString =
+    platform && Array.isArray(platform) && platform.join(", ");
+  const genresString = genre && Array.isArray(genre) && genre.join(", ");
 
   return (
     <>
@@ -43,15 +50,18 @@ function DetailPage({
         <p className={style.detail_page__platform}>
           Plataforms: {platformString}
         </p>
-        <p className={style.detail_page__platform}>
-          Rating: {rating}
-        </p>
-        <p className={style.detail_page__platform}>
-          Genres: {genresString}
-        </p>
-        <p className={style.detail_page__description}>
-          Description: {trueDescription.toString()}
-        </p>
+        <p className={style.detail_page__platform}>Rating: {rating}</p>
+        <p className={style.detail_page__platform}>Genres: {genresString}</p>
+        {descriptionType ? (
+          <p className={style.detail_page__description}>
+            Description: {description}
+          </p>
+        ) : (
+          <p className={style.detail_page__description}>
+            Description: {trueDescription.toString()}
+          </p>
+        )}
+
         <button
           className={style.detail_page__close_button}
           onClick={handleButtonClick}

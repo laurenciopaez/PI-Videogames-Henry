@@ -68,16 +68,16 @@ const getVideogames = async (req, res) => {
 
 //obtiene el detalle de un juego especifico, tiene que funcionar para los videojuegos de la api como de la base de datos
 const getVideogameById = async (req, res) => {
-  //req.params.id EL PARAMETRO DEL ID QUE ENVIO POR SOLICITUD
   try {
+    // Solicitud a la API
     const response = await axios.get(
       `${urlVideogames}/${req.params.id}?key=${process.env.API_KEY}`
     );
+
     const tags = response.data.tags.map((tag) => tag.name);
-    const platforms = response.data.platforms.map(
-      (plataform) => plataform.platform.name
-    );
-    const videogame = {
+    const platforms = response.data.platforms.map((platform) => platform.platform.name);
+
+    const videogameFromAPI = {
       name: response.data.name,
       description: tags,
       platform: platforms,
@@ -86,8 +86,10 @@ const getVideogameById = async (req, res) => {
       rating: response.data.rating,
       genres: response.data.genres.map((genre) => genre.name),
     };
-    console.log("id");
-    res.send(videogame);
+
+    const combinedResults = [videogameFromAPI];
+
+    res.json(combinedResults);
   } catch (error) {
     console.error(error);
     res.status(500).send("Error al obtener el videojuego por id");
@@ -110,23 +112,31 @@ const getVideogameByName = async (req, res) => {
           [Op.like]: `%${name}%`,
         },
       },
-      attributes: ['name', 'description', 'platform', 'image', 'landingDate', 'rating'],
+      attributes: ['id', 'name', 'description', 'platform', 'image', 'landingDate', 'rating'],
+      include: [{
+        model: Genre,
+        attributes: ['name'],
+      }],
       limit: 5,
     });
 
     let transformedDbResults = [];
+
     if (dbResponse.length > 0) {
       transformedDbResults = dbResponse.map((result) => ({
+        id: result.id,
         name: result.name,
         description: result.description,
         platform: result.platform,
         image: result.image,
         landingDate: result.landingDate,
         rating: result.rating,
-        option: "FromBaseData: true",
+        genres: result.Genres.map((genre) => genre.name),
+        option: "FromBaseData",
       }));
     }
-
+    console.log(transformedDbResults)
+    
     const games = results.map((game) => ({
       id: game.id,
       name: game.name,
@@ -181,7 +191,7 @@ const createVideogames = async (req, res) => {
   }
 };
 
-//Inteto de usar open ai para completar las descripciones
+//OPEN IA para crear descripciones en base a los tags
 const descriptionMaker = async (req, res) => {
   const { data } = req.body;
 
@@ -207,6 +217,7 @@ const descriptionMaker = async (req, res) => {
   }
 };
 
+//verificador de url -> imagen
 const imageVerifier = async (req, res) => {
   const { url } = req.query;
   console.log('Solicitud aceptada, enviando a url: '+url)
