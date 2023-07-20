@@ -70,7 +70,6 @@ const HomePage = ({
                     rating={el.rating}
                     description={el.description}
                     genre={el.genres}
-                    //generos ACA
                   />
                 ))}
           </div>

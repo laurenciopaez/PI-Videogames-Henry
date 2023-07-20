@@ -19,7 +19,7 @@ function DetailPage({
   trueDescription,
 }) {
   const [descriptionType, setDescriptionType] = useState(false);
-
+  //maneja el estado del boton de cierre de la pestaña de detalle
   const handleButtonClick = () => {
     onClose();
   };
@@ -33,6 +33,7 @@ function DetailPage({
     }
   }, [descriptionMaker]);
 
+  //como las plataformas y los generos pueden venir uno o varios, aca los convierto a un solo string
   const platformString =
     platform && Array.isArray(platform) && platform.join(", ");
   const genresString = genre && Array.isArray(genre) && genre.join(", ");
@@ -75,6 +76,7 @@ function DetailPage({
 
 const mapStateToProps = (state) => {
   return {
+    //true description es la descripcion que genera chat gpt y la carga en redux con ese nombre
     trueDescription: state.videogames.trueDescription,
   };
 };

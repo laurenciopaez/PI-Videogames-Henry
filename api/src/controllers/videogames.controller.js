@@ -12,6 +12,7 @@ const headers = {
   "Content-Type": "application/json",
   Authorization: `Bearer ${process.env.OPEN_AI_API_KEY}`,
 };
+////////////////////
 
 //getVideogames tiene que obtener un arreglo de objetos con su informacion
 const getVideogames = async (req, res) => {
@@ -105,7 +106,8 @@ const getVideogameByName = async (req, res) => {
       `${urlVideogames}?search=${name}&key=${process.env.API_KEY}` //pide a la api la info
     );
     const results = apiResponse.data.results;
-
+    
+    //pide la info a la base de datos
     const dbResponse = await Videogame.findAll({
       where: {
         name: {
@@ -122,6 +124,7 @@ const getVideogameByName = async (req, res) => {
 
     let transformedDbResults = [];
 
+    //convierte la info de la base de datos en un array de objetos
     if (dbResponse.length > 0) {
       transformedDbResults = dbResponse.map((result) => ({
         id: result.id,
@@ -137,6 +140,7 @@ const getVideogameByName = async (req, res) => {
     }
     console.log(transformedDbResults)
     
+    //convierte la info de la api en un array de objetos
     const games = results.map((game) => ({
       id: game.id,
       name: game.name,
@@ -180,7 +184,7 @@ const createVideogames = async (req, res) => {
       landingDate,
       rating,
     });
-
+    //conecta los datos
     await newVideogame.addGenre(genreS);
 
     res.status(200).json(newVideogame);
@@ -207,7 +211,7 @@ const descriptionMaker = async (req, res) => {
 
   try {
     const response = await axios.post(urlOpenAi, body, { headers });
-
+//la manera de acceder al mensaje de que genero chatgpt
     const messages = response.data.choices[0].message.content;
     console.log(messages);
     res.json({ description: messages });

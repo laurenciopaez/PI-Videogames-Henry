@@ -107,6 +107,12 @@ function Order({
           <option value="Board Games">Board Games</option>
         </select>
       </form>
+      {/* Solo para indicar cuales se han apretado */}
+      <p>Selected: {filterType !== '' ? filterType : 'No filter selected'}</p>
+      {/* Otra opcion para el usuario para resetear los filtros de genero */}
+      <button className={styles.button} value="" onClick={handleChange}>
+        Reset filter by genre
+      </button>
       {/* filtro de procedencia */}
       <form
         className={styles.orderBy}
@@ -136,12 +142,17 @@ function Order({
 //mapea las acciones de redux a las props del componente
 const mapDispatchToProps = (dispatch) => {
   return {
+    //cada uno de estos metodos son los metodos para ordenar y filtrar
+    //ordenado
     orderByAlphabet: () => dispatch(orderByAlphabet()),
     orderByRating: () => dispatch(orderByRating()),
     orderByAlphabetD: () => dispatch(orderByAlphabetD()),
+    //filtrado
     filterByGenre: (data) => dispatch(filterByGenre(data)),
+    setDBType: () => dispatch(setDBType()),
+    //resetear la main 
     pedirVideojuegos: () => dispatch(pedirVideojuegos()),
-    setDBType: () => dispatch(setDBType())
+    
   };
 };
 

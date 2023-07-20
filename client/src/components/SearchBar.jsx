@@ -48,13 +48,6 @@ function SearchBar({ pedirVideojuegosId, pedirVideojuegosName }) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    videojuegos: state.videogames.videogames100,
-    loading: state.videogames.loading,
-  };
-};
-
 //mapea las acciones de redux a las props del componente
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -63,4 +56,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
+export default connect(null, mapDispatchToProps)(SearchBar);

@@ -12,6 +12,7 @@ import {
   DATABASE_FILTER,
 } from "../../types";
 
+//estado inicial
 const initialState = {
   videogames100: [],
   trueDescription: "",
@@ -30,13 +31,13 @@ export default function infoServerReducer(state = initialState, action) {
       return {
         ...state,
         loading: true,
-        error: action.payload,
+        
       };
     case GET_VIDEOGAMES_NAME_REQUEST:
       return {
         ...state,
         loading: true,
-        error: action.payload,
+        
       };
     case ORDER_BY_ALPHABET: {
       state.videogames100.sort((a, b) => {

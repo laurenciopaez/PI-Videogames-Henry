@@ -4,7 +4,7 @@ import DetailPage from "./DetailPage";
 
 const Card = ({ name, image, landingDate, platform, rating, genre,description }) => {
   const [showDetailPage, setShownDetailPage] = useState(false);
-
+  //este codigo de aca maneja el estado de la pagina de detail que se despliega al hacer click en una tarjeta
   const handleClick = () => {
     setShownDetailPage(true);
   };

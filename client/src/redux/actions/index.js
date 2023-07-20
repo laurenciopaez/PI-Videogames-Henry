@@ -19,9 +19,12 @@ import axios from "axios";
 
 export const pedirVideojuegos = () => {
   return (dispatch) => {
+    //marca el loading = true
     dispatch({ type: GET_VIDEOGAMES_REQUEST });
+    //pide el juego a la ruta del servidor
     axios
       .get("http://localhost:3001/videogames")
+      //si todo sale bien, marca loading false y carga la info en el estado para us consumo
       .then((response) => {
         console.log("getvideogames response: ");
         console.log(response.data);
@@ -33,12 +36,14 @@ export const pedirVideojuegos = () => {
       });
   };
 };
-
+//evento de exito en el pedido de informacion
 export const getVideogamesSuccess = (data) => ({
   type: GET_VIDEOGAMES_SUCCESS,
   payload: data,
 });
 
+//evento de error, si bien hace lo mismo que los otros get, me gusta diferenciarlos en el codigo
+//para darme cuenta que estoy haciendo 
 export const getVideogamesFailure = (error) => ({
   type: GET_VIDEOGAMES_FAILURE,
   payload: error,
@@ -46,10 +51,13 @@ export const getVideogamesFailure = (error) => ({
 
 export const pedirVideojuegosId = (id) => {
   return (dispatch) => {
+    //marca loading true
     dispatch({ type: GET_VIDEOGAMES_ID_REQUEST });
+//pide al servidor a traves de la ruta indicada
     axios
       .get(`http://localhost:3001/videogames/${id}`)
       .then((response) => {
+        //debugeo
         console.log(`getvideogames ID: ${id} response: `);
         console.log(response.data);
         dispatch({ type: GET_VIDEOGAMES_SUCCESS, payload: response.data });
@@ -61,6 +69,7 @@ export const pedirVideojuegosId = (id) => {
   };
 };
 
+//action que se encarga de pedir la info al servidor de los juegos que coincidan con el string indicado
 export const pedirVideojuegosName = (name) => {
   return (dispatch) => {
     dispatch({ type: GET_VIDEOGAMES_NAME_REQUEST });
@@ -78,8 +87,8 @@ export const pedirVideojuegosName = (name) => {
   };
 };
 
+//envia la informacion proveniente del form
 export const crearVideojuego = (data) => {
-  
     console.log('Peticion de creacion aceptada en middleware')
     axios
     .post('http://localhost:3001/videogames', data)

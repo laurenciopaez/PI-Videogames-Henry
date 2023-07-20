@@ -37,6 +37,7 @@ function FormPage({
       genreError,
     } = values;
 
+    //esto maneja que no haya errores obvios de los controladores de errores
     if (
       !nameError &&
       !descriptionError &&
@@ -48,6 +49,7 @@ function FormPage({
     ) {
       console.log("enviado");
       
+      //se forma un objeto data para crear un videojuego y poder enviarlo
       const data = {
         name: values.name,
         description: values.description,
@@ -61,6 +63,7 @@ function FormPage({
       crearVideojuego(data)
     }
 
+    //se vuelven a poner los valores originales
     setValues({
       name: "",
       nameError: false,
@@ -77,10 +80,9 @@ function FormPage({
       genreError: false,
     });
 
-    
-    //validaciones asincronas
   };
 
+  //handle change maneja los cambios en cada uno de los inputs del estado, asignando los valores correspondientes a sus variables del estado local
   const handleChange = (e) => {
     const { target } = e; //elemento que ejecuto el evento
     const { name, value } = target; //name identifca el input y value el valor actual
@@ -94,6 +96,11 @@ function FormPage({
     setValues(newValues); //sincroniza el estado nuevo
   };
 
+
+  //handleBlur es una funcion asyncrona que recibe la informacion del input una vez se ha finalizado la carga de los datos
+  //de esta manera se previene enviarle mensajes de error prematuramente
+
+  //cada uno de los manejos de errores tiene un setValue con su error para asignarlo true or false segun corresponda
   const handleBlur = async (e) => {
     //validacion asincrona de formularios (cuando se deja de hacer focus)
     const { target } = e; //elemento que ejecuto el evento
@@ -117,10 +124,13 @@ function FormPage({
       setValues((prevState) => ({ ...prevState, platformError: false }));
     }
 
+    //La imagen es la unica que requiere una solicitud asyncrona, dado que necesita verificar si el link es realmente una imagen
     if (name === "image") {
       console.log("Verificando imagen con URL: " + value);
       imageVerifier(value);
     }
+
+    //verifica que la fecha no sea anterior a 1970. Fue establecido arbitrariamente
     if (name === "landingDate") {
       const selectedDate = new Date(value);
 
@@ -186,6 +196,7 @@ function FormPage({
           onBlur={handleBlur}
           required
         />
+        {/* con estos codigos se maneja los mensajes de error del form */}
         {values.nameError && (
           <p className={styles.error}>Name should not exceed 20 characters</p>
         )}
@@ -309,11 +320,16 @@ function FormPage({
   );
 }
 
+//imageError es la unica variable del estado global que se requiere para el modulo form dado que trae la informacion de si la imagen es valida o no
+
+
 const mapStateToProps = (state) => {
   return {
     imageErrorG: state.verifier.imageError, //G de estado global
   };
 };
+
+//las dos funciones que se envian son la de verificar la imagen y la de crear el videojuego propiamente dicha
 const mapDispatchToProps = (dispatch) => {
   return {
     imageVerifier: (data) => dispatch(imageVerifier(data)),
