@@ -1,4 +1,4 @@
-# **VIDEOGAMES** | Proyecto Individual
+# Individual Project - Henry Videogames 
 <h2>This fully working website was developed using react, redux, node js, express, axios, sequelize and postgres sql. Its consuming RAWG videogames api and chatgpt api for videogames descriptions</h2>
 <h2>This project was developed on three weeks, and was evaluated by a Henry bootcamp teacher</h2>
 
